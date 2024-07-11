@@ -1,7 +1,7 @@
 resource "aws_instance" "mongodb" {
   ami           = "ami-0c55b159cbfafe1f0" # Example AMI, use the one for outdated Linux
   instance_type = "t2.micro"
-  key_name      = "your-key-pair"
+  key_name      = "devopskeypair.pem"
 
   user_data = <<-EOF
               #!/bin/bash
