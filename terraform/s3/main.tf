@@ -1,13 +1,25 @@
 resource "aws_s3_bucket" "mongodb_backup" {
   bucket = "mongodb-backup-bucket"
+  acl    = "private"  # Adjust as necessary
+}
 
-  acl = "public-read" 
+resource "aws_s3_bucket_versioning" "mongodb_backup_versioning" {
+  bucket = aws_s3_bucket.mongodb_backup.id
 
-  versioning {
-    enabled = true
+  versioning_configuration {
+    status = "Enabled"
   }
+}
 
-  tags = {
+resource "aws_s3_bucket_acl" "mongodb_backup_acl" {
+  bucket = aws_s3_bucket.mongodb_backup.id
+  acl    = "public-read"  # Adjust as necessary
+}
+
+resource "aws_s3_bucket_tagging" "mongodb_backup_tagging" {
+  bucket = aws_s3_bucket.mongodb_backup.id
+
+  tag_set = {
     Name        = "mongodb-backup-bucket"
     Environment = "Dev"
   }
