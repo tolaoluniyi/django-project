@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-1"
+  profile = "default"
+}
 resource "aws_instance" "mongodb" {
   ami           = "ami-04b70fa74e45c3917" # Example AMI, use the one for outdated Linux
   instance_type = "t2.micro"
